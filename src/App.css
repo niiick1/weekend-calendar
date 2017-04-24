@@ -1,0 +1,12 @@
+.App {
+  display: flex;
+  justify-content: center;
+}
+
+.app-container {
+  width: 500px;
+}
+
+.app-event-list-container {
+  margin-top: 1rem;
+}

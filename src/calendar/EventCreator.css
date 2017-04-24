@@ -1,0 +1,8 @@
+.event-creator-dialog {
+  width: 400px !important;
+}
+
+.event-creator-dialog .modal-body {
+  display: flex;
+  justify-content: center;
+}
