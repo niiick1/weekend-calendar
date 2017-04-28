@@ -3,6 +3,10 @@ import './EventList.css'
 
 class EventList extends Component {
 
+  static defaultProps =  {
+    onEventAdd: () => {console.log('a')}
+  }
+
   formatHour(date) {
     let hours = date.getHours(),
       minutes = date.getMinutes(),
@@ -25,6 +29,10 @@ class EventList extends Component {
 
   addEvent() {
     this.props.onEventAdd();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    nextProps.events.sort((event1, event2) => event1.date - event2.date)
   }
 
   render() {
@@ -59,10 +67,6 @@ class EventList extends Component {
       </div>
     )
   }
-}
-
-EventList.defaultProps =  {
-  onEventAdd: () => {console.log('a')}
 }
 
 export default EventList
