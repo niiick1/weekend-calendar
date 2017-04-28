@@ -8,7 +8,9 @@ class EventList extends Component {
       minutes = date.getMinutes(),
       ampm = hours >= 12 ? 'pm' : 'am'
 
-    hours %= 12
+    if (hours !== 12) {
+      hours %= 12
+    }
 
     if (hours < 10) {
       hours = `0${hours}`
@@ -22,7 +24,6 @@ class EventList extends Component {
   }
 
   addEvent() {
-    console.log('add event')
     this.props.onEventAdd();
   }
 

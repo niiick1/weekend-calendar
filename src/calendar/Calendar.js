@@ -24,25 +24,6 @@ class Calendar extends Component {
   constructor(props) {
     super(props)
 
-    this.events = {
-      "2017-3-23": [
-        {
-          name: 'Event 1',
-          date: new Date(2017, 3, 22, 14, 30)
-        },
-        {
-          name: 'Event 3',
-          date: new Date(2017, 3, 22, 15, 30)
-        }
-      ],
-      "2017-3-30": [
-        {
-          name: 'Event 2',
-          date: new Date(2017, 3, 2)
-        }
-      ]
-    };
-
     this.state = {
       currentMonth: new Date(today.getFullYear(), today.getMonth(), 1)
     }
@@ -73,7 +54,7 @@ class Calendar extends Component {
   getEvent(date) {
     let eventKey = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
 
-    return this.events[eventKey] || []
+    return this.props.events[eventKey] || []
   }
 
   getDays(monthDate) {
