@@ -6,7 +6,7 @@ import './EventCreator.css'
 function getHourOptions() {
   let hourOptions = []
 
-  for (let hour = 0; hour < 24; hour++) {
+  for (let hour = 1; hour < 13; hour++) {
     let hourStr = hour
     
     if (hour < 10) {
@@ -58,6 +58,7 @@ class EventCreator extends Component {
       when: '',
       selectedHour: '00',
       selectedMinute: '00',
+      selectedAmpm: 'AM',
       isEventNameValid: true
     }
   }
@@ -77,6 +78,7 @@ class EventCreator extends Component {
       this.setState({
         selectedHour: '00',
         selectedMinute: '00',
+        selectedAmpm: 'AM',
         event: '',
         isEventNameValid: true  
       })
@@ -86,10 +88,22 @@ class EventCreator extends Component {
   onSave() {
     if (!this.validate()) return
 
-    let selectedDate = new Date(this.state.when)
+    let selectedDate = new Date(this.state.when),
+      selectedHour = this.state.selectedHour,
+      selectedMinute = this.state.selectedMinute
 
-    selectedDate.setHours(this.state.selectedHour)
-    selectedDate.setMinutes(this.state.selectedMinute)
+    if (this.state.selectedAmpm === 'PM') {
+      if (selectedHour !== 12) {
+        selectedHour += 12
+      }
+    } else {
+      if (selectedHour === 12) {
+        selectedHour = 0
+      }
+    }
+
+    selectedDate.setHours(selectedHour)
+    selectedDate.setMinutes(selectedMinute)
 
     this.props.onSave({
       name: this.state.event,
@@ -106,10 +120,10 @@ class EventCreator extends Component {
     let fieldValue = e.target.value
 
     if (fieldName === 'event') {
-      fieldValue = fieldValue.trim()
+      let trimmedValue = fieldValue.trim()
 
       this.setState({
-        isEventNameValid: !!fieldValue
+        isEventNameValid: !!trimmedValue
       })
     }
 
@@ -193,6 +207,16 @@ class EventCreator extends Component {
                 onChange={(e) => this.handleChange(e)}
               >
                 {getMinutesOptions()}
+              </FormControl>
+              {' '}
+              <FormControl 
+                componentClass='select'
+                name='selectedAmpm'
+                value={this.state.selectedAmpm}
+                onChange={(e) => this.handleChange(e)}
+              >
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
               </FormControl>
             </Form>
           </Modal.Body>
