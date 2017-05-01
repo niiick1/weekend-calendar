@@ -11,6 +11,14 @@
   margin-bottom: 0.5rem;
 }
 
+.calendar-header-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 1rem;
+}
+
 .calendar-header-weekdays {
   display: flex;
 }
@@ -66,4 +74,50 @@
 
 .calendar-footer {
   margin-top: 0.5rem;
+}
+
+.calendar-today-button {
+  width: 100%;
+  border: 0;
+  background-color: transparent;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: salmon;
+  outline: none;
+}
+
+.calendar-today-button:hover {
+  background-color: hsla(17, 80%, 96%, 1);
+}
+
+.chevron {
+  cursor: pointer;
+}
+
+.chevron:hover {
+  color: white;
+}
+
+.chevron::before {
+  border-style: solid;
+  border-width: 0.25em 0.25em 0 0;
+  content: '';
+  display: inline-block;
+  height: 0.75em;
+  left: 0.15em;
+  position: relative;
+  top: 0.15em;
+  transform: rotate(-45deg);
+  vertical-align: top;
+  width: 0.75em;
+}
+
+.chevron.right:before {
+  left: -0.15em;
+  transform: rotate(45deg);
+}
+
+.chevron.left:before {
+  left: 0.25em;
+  transform: rotate(-135deg);
 }

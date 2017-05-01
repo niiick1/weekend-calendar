@@ -49,6 +49,8 @@ class Calendar extends Component {
     this.setState({
       currentMonth: new Date(today.getFullYear(), today.getMonth(), 1)
     })
+
+    this.handleDayClick(today)
   }
 
   getEvent(date) {
@@ -114,8 +116,18 @@ class Calendar extends Component {
     return (
       <div className='calendar'>
         <div className='calendar-header'>
-          <div className='calendar-header-info'>
-            {`${MONTH_NAMES[this.state.currentMonth.getMonth()]} ${this.state.currentMonth.getFullYear()}`}
+          <div className='calendar-header-controls'>
+            <span 
+              className='chevron left'
+              onClick={e => this.previousMonth(e)}
+            />
+            <div className='calendar-header-info'>
+              {`${MONTH_NAMES[this.state.currentMonth.getMonth()]} ${this.state.currentMonth.getFullYear()}`}
+            </div>
+            <span 
+              className='chevron right'
+              onClick={e => this.nextMonth(e)}
+            />
           </div>
           <div className='calendar-header-weekdays'>
             {
@@ -136,9 +148,11 @@ class Calendar extends Component {
         </div>
 
         <div className='calendar-footer'>
-          <button onClick={e => this.previousMonth(e)}>Previous</button>
-          <button onClick={e => this.goToToday(e)}>Today</button>
-          <button onClick={e => this.nextMonth(e)}>Next</button>
+          <button
+            className='calendar-today-button'
+            onClick={e => this.goToToday(e)}>
+              Today
+          </button>
         </div>
       </div>
     )
