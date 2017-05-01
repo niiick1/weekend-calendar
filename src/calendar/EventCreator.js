@@ -56,7 +56,7 @@ class EventCreator extends Component {
     this.state = {
       event: '',
       when: '',
-      selectedHour: '00',
+      selectedHour: '01',
       selectedMinute: '00',
       selectedAmpm: 'AM',
       isEventNameValid: true
@@ -76,7 +76,7 @@ class EventCreator extends Component {
 
     if (nextProps.open && nextProps.open !== this.props.open) {
       this.setState({
-        selectedHour: '00',
+        selectedHour: '01',
         selectedMinute: '00',
         selectedAmpm: 'AM',
         event: '',
@@ -89,8 +89,8 @@ class EventCreator extends Component {
     if (!this.validate()) return
 
     let selectedDate = new Date(this.state.when),
-      selectedHour = this.state.selectedHour,
-      selectedMinute = this.state.selectedMinute
+      selectedHour = parseInt(this.state.selectedHour, 10),
+      selectedMinute = parseInt(this.state.selectedMinute, 10)
 
     if (this.state.selectedAmpm === 'PM') {
       if (selectedHour !== 12) {
