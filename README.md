@@ -1,6 +1,8 @@
 # weekend-calendar
 
-Use `npm start` to run.
+On the first time, run `npm install`.
+
+Use `npm start` to open the app at `http://localhost:3000`.
 
 ---
 
