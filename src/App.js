@@ -24,25 +24,24 @@ class App extends Component {
     super(props)
 
     this.state = {
-      events: {
-        "2017-3-23": [
-          {
-            name: 'Event 1',
-            date: new Date(2017, 3, 22, 14, 30)
-          },
-          {
-            name: 'Event 3',
-            date: new Date(2017, 3, 22, 15, 30)
-          }
-        ],
-        "2017-3-30": [
-          {
-            name: 'Event 2',
-            date: new Date(2017, 3, 2)
-          }
-        ]
-      }
+      events: {}
     }
+  }
+
+  componentDidMount() {
+    fetch('/events')
+      .then(res => res.json())
+      .then(({events}) => {
+        Object.keys(events).forEach(key => {
+          events[key] = events[key].map(event => {
+            event.date = new Date(event.date)
+            return event
+          })
+        })
+
+        return {events}
+      })
+      .then(events => this.setState(events))
   }
 
   handleDayClick(date, events) {

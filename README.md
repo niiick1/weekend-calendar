@@ -4,6 +4,10 @@ On the first time, run `npm install`.
 
 Use `npm start` to open the app at `http://localhost:3000`.
 
+## Start the back-end
+
+Execute the instructions at [server/README](server/README.md) to start the back-end server the application relies on.
+
 ---
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

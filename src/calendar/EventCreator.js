@@ -105,10 +105,24 @@ class EventCreator extends Component {
     selectedDate.setHours(selectedHour)
     selectedDate.setMinutes(selectedMinute)
 
-    this.props.onSave({
+    let event = {
       name: this.state.event,
       date: selectedDate
-    });
+    }
+
+    let eventCreator = this
+
+    fetch('/events', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(event)
+    }).then(res => res.json())
+    .then(e => {
+      e.date = new Date(e.date)
+      eventCreator.props.onSave(e)
+    })
   }
 
   onClose() {
